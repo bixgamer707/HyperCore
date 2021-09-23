@@ -1,0 +1,2 @@
+# HyperCore
+Simple core plugin!
