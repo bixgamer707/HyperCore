@@ -1,3 +1,3 @@
-# HyperCore 
+# BasuraPuajj
 
-Simple core but neccesary
+Basura que hice en finales de 2016 y ahora me rio piuajjasjdajsd
