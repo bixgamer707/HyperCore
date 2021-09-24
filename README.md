@@ -1,3 +1,3 @@
-# BHyperCore
+# HyperCore
 
 Simple core
