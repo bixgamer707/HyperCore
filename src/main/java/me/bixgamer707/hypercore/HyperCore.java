@@ -46,4 +46,6 @@ public class HyperCore extends JavaPlugin {
     public Spawn getSpawn() {
         return this.spawn;
     }
+    
+    //hook NullCordX??
 }
