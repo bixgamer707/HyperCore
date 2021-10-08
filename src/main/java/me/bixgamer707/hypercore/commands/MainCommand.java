@@ -9,33 +9,46 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor {
-    private HyperCore plugin;
+
+    private final YamlFile config;
+    private final YamlFile events;
+    private final YamlFile messages;
+
     public MainCommand(HyperCore plugin){
-        this.plugin = plugin;
+        this.config = plugin.getConfig();
+        this.events = plugin.getEvents();
+        this.messages = plugin.getMessages();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)){
+        if(!(sender instanceof Player)) {
             return false;
-        }else{
-            Player player = (Player) sender;
-            YamlFile config = plugin.getConfig();
-            YamlFile events = plugin.getEvents();
-            YamlFile messages = plugin.getMessages();
-            if(args.length > 0){
-                if(args[0].equalsIgnoreCase("reload")){
-                    if(player.hasPermission("hypercore.reload")){
-                        config.reload();
-                        events.reload();
-                        messages.reload();
-                        player.sendMessage(Utils.colorize(messages,messages.getString("reload-message")));
-                    }else{
-                        player.sendMessage(Utils.colorize(messages,messages.getString("no-permission")));
-                    }
+        }
 
-                }
+        Player player = (Player) sender;
+        if(!(args.length > 0)) {
+            for(String line : messages.getColoredStringList("HyperCore.Help")) {
+                player.sendMessage(line);
             }
+            return false;
+        }
+
+        if(args[0].equalsIgnoreCase("reload")) {
+
+            if(!player.hasPermission("hypercore.reload")) {
+                player.sendMessage(Utils.colorize(messages,messages.getString("no-permission")));
+                return true;
+            }
+
+            config.reload();
+            events.reload();
+            messages.reload();
+            player.sendMessage(Utils.colorize(messages,messages.getString("reload-message")));
+            return true;
+        }
+        for(String line : messages.getColoredStringList("HyperCore.Help")) {
+            player.sendMessage(line);
         }
         return true;
     }
