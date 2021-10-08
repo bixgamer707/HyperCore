@@ -27,9 +27,10 @@ public class HyperCore extends JavaPlugin {
     public String getVersion() {
         return this.version;
     }
-    public String latestVersion(){
+    public String latestVersion() {
         return this.latestVersion;
     }
+
     @Override
     public void onEnable(){
         this.config = new YamlFile(this,"config.yml");
