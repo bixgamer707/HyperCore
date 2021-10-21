@@ -1,6 +1,7 @@
 package me.bixgamer707.hypercore;
 
 import me.bixgamer707.hypercore.enums.Color;
+import me.bixgamer707.hypercore.managers.GamemodeManager;
 import me.bixgamer707.hypercore.methods.Spawn;
 import me.bixgamer707.hypercore.setup.SetupManager;
 import me.bixgamer707.hypercore.utils.YamlFile;
@@ -38,6 +39,7 @@ public class HyperCore extends JavaPlugin {
         this.events = new YamlFile(this,"events.yml");
         SetupManager sm = new SetupManager(this);
         sm.registerAll();
+        new GamemodeManager(this);
         checkUpdate();
     }
     @Override
