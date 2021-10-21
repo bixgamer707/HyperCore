@@ -19,11 +19,15 @@ import org.bukkit.World;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+@SuppressWarnings("all")
 public class SetupManager {
+
     private final HyperCore plugin;
+
     public SetupManager(HyperCore plugin){
         this.plugin = plugin;
     }
+
     public void registerCommands(){
         plugin.getCommand("clearchat").setExecutor(new ChatClear(plugin));
         plugin.getCommand("msg").setExecutor(new MsgCommand(plugin));
