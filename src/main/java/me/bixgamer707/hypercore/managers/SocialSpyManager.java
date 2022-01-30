@@ -12,17 +12,20 @@ public class SocialSpyManager {
     public static boolean containsPlayer(Player player) {
         return players.contains(player);
     }
+
     public static void addPlayer(Player player) {
-        if(!containsPlayer(player)) {
+        if (!containsPlayer(player)) {
             players.add(player);
         }
     }
+
     public static void removePlayer(Player player) {
-        if(containsPlayer(player)) {
+        if (containsPlayer(player)) {
             players.remove(player);
         }
     }
-    public static List<Player> getPlayers(){
+
+    public static List<Player> getPlayers() {
         return players;
     }
 }

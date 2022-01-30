@@ -24,11 +24,11 @@ public class SetupManager {
 
     private final HyperCore plugin;
 
-    public SetupManager(HyperCore plugin){
+    public SetupManager(HyperCore plugin) {
         this.plugin = plugin;
     }
 
-    public void registerCommands(){
+    public void registerCommands() {
         plugin.getCommand("clearchat").setExecutor(new ChatClear(plugin));
         plugin.getCommand("msg").setExecutor(new MsgCommand(plugin));
         plugin.getCommand("hypercore").setExecutor(new MainCommand(plugin));
@@ -44,7 +44,8 @@ public class SetupManager {
         plugin.getCommand("delspawn").setExecutor(new DelSpawnCommand(plugin));
         plugin.getCommand("spawn").setExecutor(new SpawnCommand(plugin));
     }
-    public void registerEvents(){
+
+    public void registerEvents() {
         Arrays.asList(
                 new BlockCommand(plugin),
                 new BlockEvent(plugin),
@@ -55,7 +56,8 @@ public class SetupManager {
                 new ChatEvent(plugin)
         ).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, plugin));
     }
-    public void registerTabComplete(){
+
+    public void registerTabComplete() {
         plugin.getCommand("msg").setTabCompleter(new TabMsg());
         plugin.getCommand("hypercore").setTabCompleter(new Tab());
         plugin.getCommand("gamemode").setTabCompleter(new TabGamemode());
@@ -64,52 +66,56 @@ public class SetupManager {
         plugin.getCommand("gamemode2").setTabCompleter(new TabAdventure());
         plugin.getCommand("gamemode3").setTabCompleter(new TabSpectator());
     }
-    public void registerAll(){
-        getLogger().info(Color.WHITE+"----------------------------------"+Color.RESET);
-        getLogger().info(Color.GREEN+"Has been activated "+Color.GRAY+"("+Color.BLUE+"version:"+Color.YELLOW+plugin.getDescription().getVersion()+Color.GRAY+")"+Color.RESET);
-        getLogger().info(Color.CYAN+"Thanks for using the plugin, "+Color.AQUA+"~bixgamer707, xlsm4"+Color.RESET);
-        getLogger().info(Color.WHITE+"----------------------------------"+Color.RESET);
+
+    public void registerAll() {
+        getLogger().info(Color.WHITE + "----------------------------------" + Color.RESET);
+        getLogger().info(Color.GREEN + "Has been activated " + Color.GRAY + "(" + Color.BLUE + "version:" + Color.YELLOW + plugin.getDescription().getVersion() + Color.GRAY + ")" + Color.RESET);
+        getLogger().info(Color.CYAN + "Thanks for using the plugin, " + Color.AQUA + "~bixgamer707, xlsm4" + Color.RESET);
+        getLogger().info(Color.WHITE + "----------------------------------" + Color.RESET);
         registerEvents();
         registerCommands();
         registerTabComplete();
         loadSpawn();
     }
-    public void unRegisterAll(){
-        getLogger().info(Color.WHITE+"----------------------------------"+Color.RESET);
-        getLogger().info(Color.YELLOW+"Has been deactivate"+Color.RESET);
-        getLogger().info(Color.RED+"Thanks for using the plugin!!"+Color.RESET);
-        getLogger().info(Color.WHITE+"----------------------------------"+Color.RESET);
+
+    public void unRegisterAll() {
+        getLogger().info(Color.WHITE + "----------------------------------" + Color.RESET);
+        getLogger().info(Color.YELLOW + "Has been deactivate" + Color.RESET);
+        getLogger().info(Color.RED + "Thanks for using the plugin!!" + Color.RESET);
+        getLogger().info(Color.WHITE + "----------------------------------" + Color.RESET);
         saveSpawn();
     }
-    public Logger getLogger(){
+
+    public Logger getLogger() {
         return plugin.getLogger();
     }
 
-    public void saveSpawn(){
-        YamlFile data = new YamlFile(plugin,"data.yml");
+    public void saveSpawn() {
+        YamlFile data = new YamlFile(plugin, "data.yml");
         Spawn spawn = plugin.getSpawn();
-        if(spawn.getSpawn() != null){
-            data.set("Spawn.x",spawn.getSpawn().getX());
-            data.set("Spawn.y",spawn.getSpawn().getY());
-            data.set("Spawn.z",spawn.getSpawn().getZ());
-            data.set("Spawn.pitch",spawn.getSpawn().getPitch());
-            data.set("Spawn.yaw",spawn.getSpawn().getYaw());
-            if(spawn.getSpawn().getWorld() == null){
+        if (spawn.getSpawn() != null) {
+            data.set("Spawn.x", spawn.getSpawn().getX());
+            data.set("Spawn.y", spawn.getSpawn().getY());
+            data.set("Spawn.z", spawn.getSpawn().getZ());
+            data.set("Spawn.pitch", spawn.getSpawn().getPitch());
+            data.set("Spawn.yaw", spawn.getSpawn().getYaw());
+            if (spawn.getSpawn().getWorld() == null) {
                 return;
             }
-            data.set("Spawn.world",spawn.getSpawn().getWorld().getName());
+            data.set("Spawn.world", spawn.getSpawn().getWorld().getName());
         }
     }
-    public void loadSpawn(){
-        YamlFile data = new YamlFile(plugin,"data.yml");
-        if(data.contains("Spawn.x")){
+
+    public void loadSpawn() {
+        YamlFile data = new YamlFile(plugin, "data.yml");
+        if (data.contains("Spawn.x")) {
             double x = data.getDouble("Spawn.x");
             double y = data.getDouble("Spawn.y");
             double z = data.getDouble("Spawn.z");
             float pitch = data.getLong("Spawn.pitch");
             float yaw = data.getLong("Spawn.yaw");
             World world = Bukkit.getWorld(data.getString("Spawn.world"));
-            plugin.getSpawn().getSetSpawn().setSpawn(new Location(world,x,y,z,yaw,pitch));
+            plugin.getSpawn().getSetSpawn().setSpawn(new Location(world, x, y, z, yaw, pitch));
         }
     }
 }

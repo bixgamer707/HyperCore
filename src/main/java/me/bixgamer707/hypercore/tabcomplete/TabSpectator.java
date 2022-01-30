@@ -1,4 +1,5 @@
 package me.bixgamer707.hypercore.tabcomplete;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,7 @@ public class TabSpectator implements TabCompleter {
         List<String> completions = new ArrayList<>();
         List<String> commands = new ArrayList<>();
         if (args.length == 1) {
-            for(Player players : Bukkit.getOnlinePlayers()){
+            for (Player players : Bukkit.getOnlinePlayers()) {
                 commands.add(players.getName());
             }
             StringUtil.copyPartialMatches(args[0], commands, completions);

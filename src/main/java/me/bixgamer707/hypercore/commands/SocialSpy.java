@@ -11,26 +11,27 @@ import org.bukkit.entity.Player;
 public class SocialSpy implements CommandExecutor {
     public static boolean toggle;
     private final HyperCore plugin;
-    public SocialSpy(HyperCore plugin){
+
+    public SocialSpy(HyperCore plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender,Command command,String label,String[] args) {
-        if(!(sender instanceof Player)){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
             return false;
-        }else{
+        } else {
             Player player = (Player) sender;
-            if(player.hasPermission("hypercore.socialspy")){
-                if(getToggle()){
+            if (player.hasPermission("hypercore.socialspy")) {
+                if (getToggle()) {
                     setToggle(false);
-                    if(SocialSpyManager.containsPlayer(player)){
+                    if (SocialSpyManager.containsPlayer(player)) {
                         SocialSpyManager.removePlayer(player);
                     }
                     sender.sendMessage(Utils.colorize(plugin.getMessages(), plugin.getMessages().getString("SocialSpy.socialspy-deactivate")));
-                }else{
+                } else {
                     setToggle(true);
-                    if(!SocialSpyManager.containsPlayer(player)){
+                    if (!SocialSpyManager.containsPlayer(player)) {
                         SocialSpyManager.addPlayer(player);
                     }
                     sender.sendMessage(Utils.colorize(plugin.getMessages(), plugin.getMessages().getString("SocialSpy.socialspy-activate")));
@@ -39,10 +40,12 @@ public class SocialSpy implements CommandExecutor {
         }
         return true;
     }
-    public static boolean getToggle(){
+
+    public static boolean getToggle() {
         return toggle;
     }
-    public static void setToggle(boolean toggle){
+
+    public static void setToggle(boolean toggle) {
         SocialSpy.toggle = toggle;
     }
 }

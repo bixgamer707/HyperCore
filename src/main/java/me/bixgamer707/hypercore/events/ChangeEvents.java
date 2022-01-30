@@ -12,9 +12,11 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class ChangeEvents implements Listener {
     private final HyperCore plugin;
-    public ChangeEvents(HyperCore plugin){
+
+    public ChangeEvents(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
     public void onItemDamage(EntityDamageEvent e) {
         YamlFile events = plugin.getEvents();
@@ -50,7 +52,7 @@ public class ChangeEvents implements Listener {
         YamlFile events = plugin.getEvents();
         if (events.getBoolean("disable-hunger.enable") && events.getStringList("disable-hunger.world").contains(e.getEntity().getWorld().getName()) && !e.isCancelled()) {
             e.setCancelled(true);
-            ((Player)e.getEntity()).setFoodLevel(20);
+            e.getEntity().setFoodLevel(20);
         }
     }
 
@@ -58,7 +60,7 @@ public class ChangeEvents implements Listener {
     public void onPlayerDeathMessage(PlayerDeathEvent e) {
         YamlFile events = plugin.getEvents();
         if (events.getBoolean("disable-death-message.enable") && events.getStringList("disable-death-message.world").contains(e.getEntity().getWorld().getName())) {
-            e.setDeathMessage((String)null);
+            e.setDeathMessage(null);
         }
     }
 

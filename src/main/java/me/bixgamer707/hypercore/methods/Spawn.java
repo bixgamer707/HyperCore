@@ -5,14 +5,15 @@ import org.bukkit.Location;
 public class Spawn {
     private final Setspawn setspawn;
 
-    public Spawn(){
+    public Spawn() {
         this.setspawn = new Setspawn();
     }
 
-    public Location getSpawn(){
+    public Location getSpawn() {
         return this.setspawn.getLocationSpawn();
     }
-    public Setspawn getSetSpawn(){
+
+    public Setspawn getSetSpawn() {
         return this.setspawn;
     }
 }

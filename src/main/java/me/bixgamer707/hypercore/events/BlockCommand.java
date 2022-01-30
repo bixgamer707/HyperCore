@@ -13,11 +13,13 @@ import java.util.List;
 
 public class BlockCommand implements Listener {
     private final HyperCore plugin;
+
     public BlockCommand(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent event){
+    public void onCommand(PlayerCommandPreprocessEvent event) {
         YamlFile events = plugin.getEvents();
         Player sender = event.getPlayer();
         String command = event.getMessage();
@@ -28,7 +30,7 @@ public class BlockCommand implements Listener {
         if (!sender.hasPermission("hypercore.useblockedcommands") || !sender.hasPermission("hypercore.*")) {
             for (final String s : events.getStringList("BlockedCommands")) {
                 if (cmd.equalsIgnoreCase(s)) {
-                    final List<String> msg = (List<String>) PlaceholderAPI.setPlaceholders(sender, events.getStringList("BlockCommands.MessageBlocked"));
+                    final List<String> msg = PlaceholderAPI.setPlaceholders(sender, events.getStringList("BlockCommands.MessageBlocked"));
                     for (final String s2 : msg) {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', s2).replace("%player%", sender.getDisplayName()));
                         event.setCancelled(true);

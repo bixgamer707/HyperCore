@@ -21,11 +21,12 @@ public enum Color {
 
     private final String value;
 
-        Color(String value) {
-            this.value = value;
-        }
-        @Override
-        public String toString() {
-            return value;
-        }
+    Color(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

@@ -10,11 +10,13 @@ import org.bukkit.event.Listener;
 
 import java.util.List;
 
-public class ServerMotd implements Listener{
+public class ServerMotd implements Listener {
     private final HyperCore plugin;
-    public ServerMotd(HyperCore plugin){
+
+    public ServerMotd(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
     public void servermotd(ServerListPingEvent event) {
         YamlFile config = plugin.getConfig();

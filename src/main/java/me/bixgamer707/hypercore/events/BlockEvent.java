@@ -15,14 +15,14 @@ import org.bukkit.GameMode;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.Listener;
 
-public class BlockEvent implements Listener
-{
+public class BlockEvent implements Listener {
     public HyperCore plugin;
+
     public BlockEvent(HyperCore plugin) {
         this.plugin = plugin;
     }
 
-    
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
         YamlFile events = plugin.getEvents();
@@ -30,39 +30,35 @@ public class BlockEvent implements Listener
         if (events.getBoolean("disable-block-break.enable") && events.getStringList("disable-block-break.world").contains(e.getBlock().getWorld().getName()) && !e.isCancelled()) {
             if (!e.getPlayer().isOp() && !e.getPlayer().hasPermission("BukkitShield.staff")) {
                 e.setCancelled(true);
-                p.sendMessage(Utils.colorize(plugin.getMessages(),events.getString("disable-block-break.message")));
+                p.sendMessage(Utils.colorize(plugin.getMessages(), events.getString("disable-block-break.message")));
                 return;
             }
-            if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-                e.setCancelled(false);
-            }else {
-                e.setCancelled(true);
-            }
+            e.setCancelled(e.getPlayer().getGameMode() != GameMode.CREATIVE);
         }
     }
-    
+
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
         YamlFile events = plugin.getEvents();
         if (!events.getBoolean("disable-block-place.enable")) {
             return;
         }
-        if(!events.getStringList("disable-block-place.world").contains(e.getBlock().getWorld().getName()) || events.getStringList("disable-block-place.world").contains("ALL")) {
+        if (!events.getStringList("disable-block-place.world").contains(e.getBlock().getWorld().getName()) || events.getStringList("disable-block-place.world").contains("ALL")) {
             return;
         }
-        if(e.isCancelled()) {
+        if (e.isCancelled()) {
             return;
         }
-        if(!e.getPlayer().isOp() || !e.getPlayer().hasPermission("HyperCore.placeblocks")) {
+        if (!e.getPlayer().isOp() || !e.getPlayer().hasPermission("HyperCore.placeblocks")) {
             e.setCancelled(true);
             return;
         }
-        if(e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+        if (e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }
         e.setCancelled(true);
     }
-    
+
     @EventHandler
     public void onBlockFire(BlockBurnEvent e) {
         YamlFile events = plugin.getEvents();

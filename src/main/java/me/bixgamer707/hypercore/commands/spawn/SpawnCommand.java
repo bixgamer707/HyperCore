@@ -11,22 +11,23 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpawnCommand implements CommandExecutor {
     private final HyperCore plugin;
-    public SpawnCommand(HyperCore plugin){
+
+    public SpawnCommand(HyperCore plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!(sender instanceof Player)){
+        if (!(sender instanceof Player)) {
             return false;
-        }else{
+        } else {
             Player player = (Player) sender;
             Spawn spawn = plugin.getSpawn();
-            if(spawn.getSetSpawn().containsSpawn()){
+            if (spawn.getSetSpawn().containsSpawn()) {
                 player.teleport(spawn.getSpawn());
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&aHas sido teletransportado al spawn"));
                 return true;
-            }else{
+            } else {
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&cEl spawn no esta definido!"));
             }
         }
