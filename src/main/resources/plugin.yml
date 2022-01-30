@@ -1,6 +1,6 @@
 name: HyperCore
 version: 1.0.0
-authors: [bixgamer707,xlsm4]
+authors: [bixgamer707,xlsm4x,jonakls]
 main: me.bixgamer707.hypercore.HyperCore
 softdepend: [PlaceholderAPI]
 commands:
