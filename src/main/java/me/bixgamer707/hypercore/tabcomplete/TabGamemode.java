@@ -1,4 +1,5 @@
 package me.bixgamer707.hypercore.tabcomplete;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,12 +22,12 @@ public class TabGamemode implements TabCompleter {
             commands.add("2");
             commands.add("3");
             StringUtil.copyPartialMatches(args[0], commands, completions);
-        }else{
-            if(args.length == 2){
-               for(Player players : Bukkit.getOnlinePlayers()){
-                   commands.add(players.getName());
-                   StringUtil.copyPartialMatches(args[1], commands, completions);
-               }
+        } else {
+            if (args.length == 2) {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    commands.add(players.getName());
+                    StringUtil.copyPartialMatches(args[1], commands, completions);
+                }
             }
         }
         Collections.sort(completions);

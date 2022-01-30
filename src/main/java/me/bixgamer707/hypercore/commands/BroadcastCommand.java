@@ -10,23 +10,24 @@ import org.bukkit.entity.Player;
 
 public class BroadcastCommand implements CommandExecutor {
     private final HyperCore plugin;
-    public BroadcastCommand(HyperCore plugin){
+
+    public BroadcastCommand(HyperCore plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender,Command command,String label,String[] args) {
-        if(!(sender instanceof Player)){
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
             return false;
-        }else{
-            if(args.length > 0){
-                if(sender.hasPermission("hypercore.broadcast")){
+        } else {
+            if (args.length > 0) {
+                if (sender.hasPermission("hypercore.broadcast")) {
                     String message = "";
-                    for(int i=0;i<=args.length-1;i++){
-                        message = message+args[i]+" ";
+                    for (int i = 0; i <= args.length - 1; i++) {
+                        message = message + args[i] + " ";
                     }
-                    for(Player players : Bukkit.getOnlinePlayers()){
-                        players.sendMessage(Utils.color("&8&l[&c&lBroadcast&8&l] &r"+message));
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        players.sendMessage(Utils.color("&8&l[&c&lBroadcast&8&l] &r" + message));
                     }
                 }
             }

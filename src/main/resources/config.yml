@@ -44,7 +44,7 @@ Msg:
   send: '&c&l(!) &8&l[&e&lTu &7-> &b%player%&8&l]&7'
   received: '&c&l(!) &8&l[&b%player% &7-> &e&lTu&8&l]&7'
 SocialSpy:
-  msg: '&b&lEspia &8&l[&e&l%tarjet% &7-> &b%player%&8&l]&7 %msg%'
+  msg: '&b&lEspia &8&l[&e&l%target% &7-> &b%player%&8&l]&7 %msg%'
 
 
 

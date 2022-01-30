@@ -12,23 +12,24 @@ import org.jetbrains.annotations.NotNull;
 
 public class SetSpawnCommand implements CommandExecutor {
     private final HyperCore plugin;
-    public SetSpawnCommand(HyperCore plugin){
+
+    public SetSpawnCommand(HyperCore plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!(sender instanceof Player)){
+        if (!(sender instanceof Player)) {
             return false;
-        }else{
+        } else {
             Player player = (Player) sender;
             Spawn spawn = plugin.getSpawn();
-            if(!spawn.getSetSpawn().containsSpawn()){
+            if (!spawn.getSetSpawn().containsSpawn()) {
                 spawn.getSetSpawn().setSpawn(player.getLocation());
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&aHas establecido el spawn correctamente!"));
                 return true;
-            }else{
-                if(!ConfirmManager.containsPlayer(player.getUniqueId())){
+            } else {
+                if (!ConfirmManager.containsPlayer(player.getUniqueId())) {
                     ConfirmManager.addPlayer(player.getUniqueId());
                 }
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&cYa existe un spawn definido!, &7Si quieres cambiarlo debes escribir en el chat '&aConfirm&7'"));

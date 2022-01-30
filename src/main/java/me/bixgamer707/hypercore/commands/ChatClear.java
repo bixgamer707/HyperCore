@@ -1,5 +1,3 @@
-
-
 package me.bixgamer707.hypercore.commands;
 
 import java.util.List;
@@ -15,19 +13,21 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 
-public class ChatClear implements CommandExecutor{
+public class ChatClear implements CommandExecutor {
     private final HyperCore plugin;
-    public ChatClear(HyperCore plugin){
+
+    public ChatClear(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     public boolean onCommand(final CommandSender sender, final Command cmd, final String s, final String[] strings) {
         if (!(sender instanceof Player)) {
             return false;
         }
-        Player p = (Player)sender;
+        Player p = (Player) sender;
         YamlFile messages = plugin.getMessages();
         if (!p.hasPermission("hypercore.clearchat")) {
-            sender.sendMessage(Utils.colorize(messages,messages.getString("HyperCore.ClearChat.Perms")));
+            sender.sendMessage(Utils.colorize(messages, messages.getString("HyperCore.ClearChat.Perms")));
             return true;
         }
         StringBuilder emptyLinesBuilder = new StringBuilder();

@@ -18,41 +18,49 @@ public class HyperCore extends JavaPlugin {
     public String version = pdf.getVersion();
     public String latestVersion;
     public static HyperCore instace;
+
     public static HyperCore getInstace() {
         return instace;
     }
+
     private YamlFile config;
     private YamlFile messages;
     private YamlFile events;
     private final Spawn spawn = new Spawn();
+
     public String getVersion() {
         return this.version;
     }
+
     public String latestVersion() {
         return this.latestVersion;
     }
 
     @Override
-    public void onEnable(){
-        this.config = new YamlFile(this,"config.yml");
-        this.messages = new YamlFile(this,"messages.yml");
-        this.events = new YamlFile(this,"events.yml");
+    public void onEnable() {
+        this.config = new YamlFile(this, "config.yml");
+        this.messages = new YamlFile(this, "messages.yml");
+        this.events = new YamlFile(this, "events.yml");
         SetupManager sm = new SetupManager(this);
         sm.registerAll();
         new GamemodeManager(this);
         checkUpdate();
     }
+
     @Override
-    public void onDisable(){
+    public void onDisable() {
         SetupManager sm = new SetupManager(this);
         sm.unRegisterAll();
     }
+
     public YamlFile getConfig() {
         return config;
     }
+
     public YamlFile getMessages() {
         return messages;
     }
+
     public YamlFile getEvents() {
         return events;
     }
@@ -60,6 +68,7 @@ public class HyperCore extends JavaPlugin {
     public Spawn getSpawn() {
         return this.spawn;
     }
+
     public void checkUpdate() {
         try {
             HttpURLConnection con = (HttpURLConnection) new URL(
@@ -69,14 +78,14 @@ public class HyperCore extends JavaPlugin {
             con.setReadTimeout(timed_out);
             latestVersion = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
             if (latestVersion.length() <= 7) {
-                if(!version.equals(latestVersion)){
-                    getLogger().info(Color.RED+"There is a version available of");
-                    getLogger().info(Color.YELLOW+"You can download it at:");
-                    getLogger().info(Color.AQUA+"https://www.spigotmc.org/resources/sternal-hypercore-very-necessary.96652/");
+                if (!version.equals(latestVersion)) {
+                    getLogger().info(Color.RED + "There is a version available of");
+                    getLogger().info(Color.YELLOW + "You can download it at:");
+                    getLogger().info(Color.AQUA + "https://www.spigotmc.org/resources/sternal-hypercore-very-necessary.96652/");
                 }
             }
         } catch (Exception ex) {
-            getLogger().info(Color.RED+"Error while checking update.");
+            getLogger().info(Color.RED + "Error while checking update.");
         }
     }
 }

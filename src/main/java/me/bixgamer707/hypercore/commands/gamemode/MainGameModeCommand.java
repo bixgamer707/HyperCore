@@ -15,14 +15,14 @@ public class MainGameModeCommand implements CommandExecutor {
 
     private final YamlFile messages;
 
-    public MainGameModeCommand(HyperCore plugin){
+    public MainGameModeCommand(HyperCore plugin) {
         this.messages = plugin.getMessages();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if(!(sender instanceof Player)){
+        if (!(sender instanceof Player)) {
             return false;
         }
 
@@ -30,24 +30,24 @@ public class MainGameModeCommand implements CommandExecutor {
 
         String noPermsions = Utils.colorize(
                 messages, messages.getString("no-permission")
-        ).replaceAll("%player%",player.getName());
+        ).replaceAll("%player%", player.getName());
 
-        if(args.length < 1){
+        if (args.length < 1) {
             player.sendMessage(Utils.colorize(messages, messages.getString("gamemode.help")));
             return false;
         }
 
-        if(!player.hasPermission("hypercore.gamemode.*")){
+        if (!player.hasPermission("hypercore.gamemode.*")) {
             player.sendMessage(noPermsions);
             return true;
         }
 
-        if(args[0].equalsIgnoreCase("0")) {
-            if(!player.hasPermission("hypercore.gamemode.0")){
+        if (args[0].equalsIgnoreCase("0")) {
+            if (!player.hasPermission("hypercore.gamemode.0")) {
                 player.sendMessage(noPermsions);
                 return true;
             }
-            if(args.length > 1){
+            if (args.length > 1) {
                 GamemodeManager.change(player, args[1], GameMode.SURVIVAL);
                 return true;
             }
@@ -55,12 +55,12 @@ public class MainGameModeCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[0].equalsIgnoreCase("1")){
-            if(!player.hasPermission("hypercore.gamemode.1")){
+        if (args[0].equalsIgnoreCase("1")) {
+            if (!player.hasPermission("hypercore.gamemode.1")) {
                 player.sendMessage(noPermsions);
                 return true;
             }
-            if(args.length > 1){
+            if (args.length > 1) {
                 GamemodeManager.change(player, args[1], GameMode.CREATIVE);
                 return true;
             }
@@ -68,12 +68,12 @@ public class MainGameModeCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[0].equalsIgnoreCase("2")){
-            if(!player.hasPermission("hypercore.gamemode.2")){
+        if (args[0].equalsIgnoreCase("2")) {
+            if (!player.hasPermission("hypercore.gamemode.2")) {
                 player.sendMessage(noPermsions);
                 return true;
             }
-            if(args.length > 1){
+            if (args.length > 1) {
                 GamemodeManager.change(player, args[1], GameMode.ADVENTURE);
                 return true;
             }
@@ -81,12 +81,12 @@ public class MainGameModeCommand implements CommandExecutor {
             return true;
         }
 
-        if(args[0].equalsIgnoreCase("3")){
-            if(!player.hasPermission("hypercore.gamemode.3")){
+        if (args[0].equalsIgnoreCase("3")) {
+            if (!player.hasPermission("hypercore.gamemode.3")) {
                 player.sendMessage(noPermsions);
                 return true;
             }
-            if(args.length > 1){
+            if (args.length > 1) {
                 GamemodeManager.change(player, args[1], GameMode.SPECTATOR);
                 return true;
             }

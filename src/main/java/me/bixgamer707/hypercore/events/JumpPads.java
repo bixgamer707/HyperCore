@@ -13,19 +13,21 @@ import org.bukkit.event.Listener;
 
 import java.util.Objects;
 
-public class JumpPads implements Listener{
+public class JumpPads implements Listener {
     private final HyperCore plugin;
-    public JumpPads(HyperCore plugin){
+
+    public JumpPads(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         YamlFile configuration = plugin.getEvents();
-        if(!configuration.getBoolean("LAUNCH_PAD.enable")){
+        if (!configuration.getBoolean("LAUNCH_PAD.enable")) {
             return;
         }
-        if(!configuration.getStringList("LAUNCH_PAD.enable-worlds").contains(player.getWorld().getName()) || !configuration.getStringList("LAUNCH_PAD.enable-worlds").contains("ALL") ){
+        if (!configuration.getStringList("LAUNCH_PAD.enable-worlds").contains(player.getWorld().getName()) || !configuration.getStringList("LAUNCH_PAD.enable-worlds").contains("ALL")) {
             return;
         }
         if (!player.getLocation().getBlock().getType().equals(Material.matchMaterial(Objects.requireNonNull(configuration.getString("LAUNCH_PAD.MATERIAL"))))) {
@@ -34,13 +36,13 @@ public class JumpPads implements Listener{
         Vector vectah = player.getLocation().getDirection().multiply(2.0).setY(1.0);
         player.setVelocity(vectah);
         String[] split = configuration.getString("LAUNCH_PAD.SOUND").split(";");
-        try{
+        try {
             Sound sound = Sound.valueOf(split[0]);
             int vol = Integer.valueOf(split[1]);
             float pitch = Float.valueOf(split[2]);
-            player.playSound(player.getLocation(),sound,vol,pitch);
-        }catch (IllegalArgumentException e){
-            plugin.getLogger().warning(Color.RED+"Warn!, "+Color.ORANGE+"The "+split[0]+" sound"+Color.RED+" is invalid.");
+            player.playSound(player.getLocation(), sound, vol, pitch);
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning(Color.RED + "Warn!, " + Color.ORANGE + "The " + split[0] + " sound" + Color.RED + " is invalid.");
         }
     }
 }

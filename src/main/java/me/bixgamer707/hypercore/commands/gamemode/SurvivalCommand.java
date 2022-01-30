@@ -14,28 +14,28 @@ public class SurvivalCommand implements CommandExecutor {
 
     private final YamlFile messages;
 
-    public SurvivalCommand(HyperCore plugin){
+    public SurvivalCommand(HyperCore plugin) {
         this.messages = plugin.getMessages();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             return false;
         }
         Player player = (Player) sender;
-        if(!(args.length > 0)) {
-            if(!player.hasPermission("hypercore.gamemode.0") || !player.hasPermission("hypercore.gamemode.*")) {
+        if (!(args.length > 0)) {
+            if (!player.hasPermission("hypercore.gamemode.0") || !player.hasPermission("hypercore.gamemode.*")) {
                 player.sendMessage(Utils.colorize(messages, messages.getString("no-permission"))
-                        .replaceAll("%player%",player.getName()));
+                        .replaceAll("%player%", player.getName()));
                 return true;
             }
             GamemodeManager.change(player, GameMode.SURVIVAL);
             return true;
         }
-        if(!player.hasPermission("hypercore.gamemode.0") || !player.hasPermission("hypercore.gamemode.*")) {
+        if (!player.hasPermission("hypercore.gamemode.0") || !player.hasPermission("hypercore.gamemode.*")) {
             player.sendMessage(Utils.colorize(messages, messages.getString("no-permission"))
-                    .replaceAll("%player%",player.getName()));
+                    .replaceAll("%player%", player.getName()));
             return true;
         }
         GamemodeManager.change(player, args[0], GameMode.SURVIVAL);

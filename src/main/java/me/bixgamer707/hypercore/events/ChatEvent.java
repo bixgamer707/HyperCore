@@ -11,22 +11,24 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatEvent implements Listener {
     private final HyperCore plugin;
-    public ChatEvent(HyperCore plugin){
+
+    public ChatEvent(HyperCore plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent event){
+    public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        if(ConfirmManager.containsPlayer(player.getUniqueId())){
+        if (ConfirmManager.containsPlayer(player.getUniqueId())) {
             String msg = event.getMessage();
-            if(msg.contains("Confirm")){
+            if (msg.contains("Confirm")) {
                 Spawn spawn = plugin.getSpawn();
                 spawn.getSetSpawn().setSpawn(player.getLocation());
                 ConfirmManager.removePlayer(player.getUniqueId());
-            }else if(msg.contains("Cancel")){
+            } else if (msg.contains("Cancel")) {
                 ConfirmManager.removePlayer(player.getUniqueId());
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&7Has rechazado el remplazo del spawn!"));
-            }else{
+            } else {
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "&7Recuerda que debes escribir '&aConfirmar&7'"));
                 player.sendMessage(Utils.colorize(plugin.getMessages(), "para confirmar o '&cCancel&7' para rechazar"));
             }

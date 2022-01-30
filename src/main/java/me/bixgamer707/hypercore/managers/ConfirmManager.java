@@ -15,18 +15,18 @@ public class ConfirmManager {
     }
 
     public static void addPlayer(UUID player) {
-        if(!containsPlayer(player)) {
+        if (!containsPlayer(player)) {
             players.add(player);
         }
     }
 
     public static void removePlayer(UUID player) {
-        if(containsPlayer(player)) {
+        if (containsPlayer(player)) {
             players.remove(player);
         }
     }
 
-    public static List<UUID> getPlayers(){
+    public static List<UUID> getPlayers() {
         return players;
     }
 }

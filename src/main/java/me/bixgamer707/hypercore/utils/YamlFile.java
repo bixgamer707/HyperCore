@@ -1,8 +1,10 @@
 package me.bixgamer707.hypercore.utils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
+
 import me.bixgamer707.hypercore.HyperCore;
 
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -28,6 +30,7 @@ public class YamlFile extends YamlConfiguration {
     public YamlFile(HyperCore plugin, String fileName) {
         this(plugin, fileName, plugin.getDataFolder());
     }
+
     private void createFile() {
         try {
             this.file = new File(this.folder, this.fileName);
@@ -75,6 +78,7 @@ public class YamlFile extends YamlConfiguration {
             this.plugin.getLogger().log(Level.SEVERE, "Reload of the file '" + this.fileName + "' failed.", e);
         }
     }
+
     public String getColoredString(String path) {
         return Utils.color(getString(path));
     }
